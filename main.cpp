@@ -108,8 +108,6 @@ inf
 
 good to go!
 
-
-/*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
 
  Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
@@ -320,7 +318,7 @@ FloatType& FloatType::multiply(float rhs)
 FloatType& FloatType::divide(float rhs)
 {
     if ( rhs == 0.f )
-        std::cout << "\nwarning, floating point division by zero returns 'inf' !" << std::endl;
+        std::cout << "warning: floating point division by zero!" << std::endl;
     
     *fltPtr /= rhs;
     return *this;
@@ -408,7 +406,7 @@ DoubleType& DoubleType::multiply(double rhs)
 DoubleType& DoubleType::divide(double rhs)
 {
     if ( rhs == 0.0 )
-        std::cout << "\nwarning, floating point division by zero returns 'inf' !" << std::endl;
+        std::cout << "warning: floating point division by zero!" << std::endl;
 
     *dblPtr /= rhs;
     return *this;
@@ -496,7 +494,7 @@ IntType& IntType::divide(int rhs)
 {
     if (rhs == 0)
     {
-        std::cout << "error, integer division by zero will crash the program!" << std::endl;
+        std::cout << "error: integer division by zero is an error and will crash the program!" << std::endl;
     }
     else 
     {
