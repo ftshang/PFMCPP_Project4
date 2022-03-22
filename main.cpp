@@ -130,6 +130,9 @@ struct FloatType
     float subtract( float lhs, float rhs );
     float multiply( float lhs, float rhs );
     float divide( float lhs, float rhs );
+
+    // Heap-Allocated Float
+    float* floatPtr = new float;
 };
 
 float FloatType::add( float lhs, float rhs )
@@ -160,6 +163,9 @@ struct DoubleType
     double subtract( double lhs, double rhs );
     double multiply( double lhs, double rhs );
     double divide( double lhs, double rhs );
+
+    // Heap-Allocated Double
+    double* dblPtr = new double;
 };
 
 double DoubleType::add( double lhs, double rhs )
@@ -190,6 +196,9 @@ struct IntType
     int subtract( int lhs, int rhs );
     int multiply( int lhs, int rhs );
     int divide( int lhs, int rhs );
+
+    // Heap-Allocated Int 
+    int* intPtr = new int;
 };
 
 int IntType::add( int lhs, int rhs )
