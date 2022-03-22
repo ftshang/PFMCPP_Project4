@@ -14,6 +14,7 @@ New/This/Pointers/References conclusion
          on the heap without leaking, without using smart pointers. 
  */
 
+// Instruction 0
 struct A {};
 
 struct HeapA 
@@ -122,6 +123,7 @@ good to go!
  Wait for my code review.
  */
 
+
 #include <iostream>
 
 struct FloatType
@@ -131,8 +133,14 @@ struct FloatType
     float multiply( float lhs, float rhs );
     float divide( float lhs, float rhs );
 
-    // Heap-Allocated Float
+    // Heap-Allocated Float (Instruction 1)
     float* floatPtr = new float;
+
+    // Constructor (Instruction 2)
+    FloatType(float fValue)
+    {
+        *floatPtr = fValue;
+    }
 };
 
 float FloatType::add( float lhs, float rhs )
@@ -164,8 +172,14 @@ struct DoubleType
     double multiply( double lhs, double rhs );
     double divide( double lhs, double rhs );
 
-    // Heap-Allocated Double
+    // Heap-Allocated Double (Instruction 1)
     double* dblPtr = new double;
+
+    // Constructor (Instruction 2)
+    DoubleType(double dValue)
+    {
+        *dblPtr = dValue;
+    }
 };
 
 double DoubleType::add( double lhs, double rhs )
@@ -197,8 +211,14 @@ struct IntType
     int multiply( int lhs, int rhs );
     int divide( int lhs, int rhs );
 
-    // Heap-Allocated Int 
+    // Heap-Allocated Int (Instruction 1)
     int* intPtr = new int;
+
+    // Constructor (Instruction 2)
+    IntType(int iValue)
+    {
+        *intPtr = iValue;
+    }
 };
 
 int IntType::add( int lhs, int rhs )
