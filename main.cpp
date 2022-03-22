@@ -126,43 +126,60 @@ good to go!
 
 #include <iostream>
 
+
 struct FloatType
 {
-    float add( float lhs, float rhs );
-    float subtract( float lhs, float rhs );
-    float multiply( float lhs, float rhs );
-    float divide( float lhs, float rhs );
+    // Instruction 3
+    FloatType& add( float lhs );
+    FloatType& subtract( float lhs );
+    FloatType& multiply( float lhs );
+    FloatType& divide( float lhs );
 
     // Heap-Allocated Float (Instruction 1)
-    float* floatPtr = new float;
+    float* fltPtr = new float;
+    float& value = *fltPtr;
 
     // Constructor (Instruction 2)
     FloatType(float fValue)
     {
-        *floatPtr = fValue;
+        *fltPtr = fValue;
     }
 };
+/*
+3) modify those add/subtract/divide/multiply member functions from chapter 2 on it
+         a) make them modify the owned numeric type
+         b) set them up so they can be chained together.
+             i.e.
+             DoubleType dt(3.5);
+             dt.add(3.0).multiply(-2.5).divide(7.2); //an example of chaining
+*/
 
-float FloatType::add( float lhs, float rhs )
+FloatType& FloatType::add( float lhs )
 {
-    return lhs + rhs;
+    *fltPtr += lhs;
+
+    return *this;
 }
 
-float FloatType::subtract( float lhs, float rhs )
+FloatType& FloatType::subtract( float lhs )
 {
-    return lhs - rhs;
+    *fltPtr -= lhs;
+    return *this;
 }
 
-float FloatType::multiply( float lhs, float rhs )
+FloatType& FloatType::multiply( float lhs )
 {
-    return lhs * rhs;
+    *fltPtr *= lhs;
+    return *this;
 }
 
-float FloatType::divide( float lhs, float rhs )
+FloatType& FloatType::divide( float lhs)
 {
-    if ( rhs == 0.f )
+    if ( lhs == 0.f )
         std::cout << "\nwarning, floating point division by zero returns 'inf' !" << std::endl;
-    return lhs / rhs;
+    
+    *fltPtr /= lhs;
+    return *this;
 }
 
 struct DoubleType
@@ -212,12 +229,12 @@ struct IntType
     int divide( int lhs, int rhs );
 
     // Heap-Allocated Int (Instruction 1)
-    int* intPtr = new int;
+    int* value = new int;
 
     // Constructor (Instruction 2)
     IntType(int iValue)
     {
-        *intPtr = iValue;
+        *value = iValue;
     }
 };
 
@@ -262,39 +279,39 @@ int main()
     std::cout << "FloatType multiply result=" << ft.multiply( 2.0f ).value << std::endl;
     std::cout << "FloatType divide result=" << ft.divide( 16.0f).value << std::endl << std::endl;
 
-    std::cout << "DoubleType add result=" << dt.add(2.0).value << std::endl;
-    std::cout << "DoubleType subtract result=" << dt.subtract(2.0).value << std::endl;
-    std::cout << "DoubleType multiply result=" << dt.multiply(2.0).value << std::endl;
-    std::cout << "DoubleType divide result=" << dt.divide(5.f).value << std::endl << std::endl;
+    // std::cout << "DoubleType add result=" << dt.add(2.0).value << std::endl;
+    // std::cout << "DoubleType subtract result=" << dt.subtract(2.0).value << std::endl;
+    // std::cout << "DoubleType multiply result=" << dt.multiply(2.0).value << std::endl;
+    // std::cout << "DoubleType divide result=" << dt.divide(5.f).value << std::endl << std::endl;
 
-    std::cout << "IntType add result=" << it.add(2).value << std::endl;
-    std::cout << "IntType subtract result=" << it.subtract(2).value << std::endl;
-    std::cout << "IntType multiply result=" << it.multiply(2).value << std::endl;
-    std::cout << "IntType divide result=" << it.divide(3).value << std::endl << std::endl;
-    std::cout << "Chain calculation = " << (it.multiply(1000).divide(2).subtract(10).add(100)).value << std::endl;
+    // std::cout << "IntType add result=" << it.add(2).value << std::endl;
+    // std::cout << "IntType subtract result=" << it.subtract(2).value << std::endl;
+    // std::cout << "IntType multiply result=" << it.multiply(2).value << std::endl;
+    // std::cout << "IntType divide result=" << it.divide(3).value << std::endl << std::endl;
+    // std::cout << "Chain calculation = " << (it.multiply(1000).divide(2).subtract(10).add(100)).value << std::endl;
 
-        // FloatType object instanciation and method tests
-    // --------
-    std::cout << "New value of ft = (ft + 3.0f) * 1.5f / 5.0f = " << ft.add( 3.0f ).multiply(1.5f).divide(5.0f).value << std::endl;
+    //     // FloatType object instanciation and method tests
+    // // --------
+    // std::cout << "New value of ft = (ft + 3.0f) * 1.5f / 5.0f = " << ft.add( 3.0f ).multiply(1.5f).divide(5.0f).value << std::endl;
        
-    std::cout << "---------------------\n" << std::endl; 
+    // std::cout << "---------------------\n" << std::endl; 
     
-    // DoubleType/IntType object instanciation and method tests
-    // --------
-    std::cout << "Initial value of dt: " << dt.value << std::endl;
-    std::cout << "Initial value of it: " << it.value << std::endl;
-    // --------
-    std::cout << "Use of function concatenation (mixed type arguments) " << std::endl;
-    std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << (dt.multiply(it).divide(5.0f).add(ft).value) << std::endl;
+    // // DoubleType/IntType object instanciation and method tests
+    // // --------
+    // std::cout << "Initial value of dt: " << dt.value << std::endl;
+    // std::cout << "Initial value of it: " << it.value << std::endl;
+    // // --------
+    // std::cout << "Use of function concatenation (mixed type arguments) " << std::endl;
+    // std::cout << "New value of dt = (dt * it) / 5.0f + ft = " << (dt.multiply(it).divide(5.0f).add(ft).value) << std::endl;
 
-    std::cout << "---------------------\n" << std::endl; 
+    // std::cout << "---------------------\n" << std::endl; 
     
-    // Intercept division by 0
-    // --------
-    std::cout << "Intercept division by 0 " << std::endl;
-    std::cout << "New value of it = it / 0 = " << it.divide(0).value << std::endl;
-    std::cout << "New value of ft = ft / 0 = " << ft.divide(0).value << std::endl;
-    std::cout << "New value of dt = dt / 0 = " << dt.divide(0).value << std::endl;
+    // // Intercept division by 0
+    // // --------
+    // std::cout << "Intercept division by 0 " << std::endl;
+    // std::cout << "New value of it = it / 0 = " << it.divide(0).value << std::endl;
+    // std::cout << "New value of ft = ft / 0 = " << ft.divide(0).value << std::endl;
+    // std::cout << "New value of dt = dt / 0 = " << dt.divide(0).value << std::endl;
 
     std::cout << "---------------------\n" << std::endl; 
 
