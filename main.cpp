@@ -116,19 +116,24 @@ struct FloatType
     // Constructor (Instruction 2)
     FloatType(float fValue)
     {
-        *fltPtr = fValue;
+        *value = fValue;
+    }
+
+    // Destructor
+    ~FloatType()
+    {
+        delete value;
     }
 
     // Conversion Function
     operator float() const
     {
-        return value;
+        return *value;
     }
 
 private:
     // Heap-Allocated Float (Instruction 1)
-    float* fltPtr = new float;
-    float& value = *fltPtr;
+    float* value = new float;
 };
 
 struct DoubleType
@@ -142,19 +147,24 @@ struct DoubleType
     // Constructor (Instruction 2)
     DoubleType(double dValue)
     {
-        *dblPtr = dValue;
+        *value = dValue;
+    }
+
+    // Destructor
+    ~DoubleType()
+    {
+        delete value;
     }
 
     // Conversion function
     operator double() const
     {
-        return value;
+        return *value;
     }
 
 private:
     // Heap-Allocated Double (Instruction 1)
-    double* dblPtr = new double;
-    double& value = *dblPtr;
+    double* value = new double;
 
 };
 
@@ -169,38 +179,43 @@ struct IntType
     // Constructor (Instruction 2)
     IntType(int iValue)
     {
-        *intPtr = iValue;
+        *value = iValue;
+    }
+
+    // Destructor
+    ~IntType()
+    {
+        delete value;
     }
 
     // Conversion function
     operator int() const
     {
-        return value;
+        return *value;
     }
 
 private:
     // Heap-Allocated Int (Instruction 1)
-    int* intPtr = new int;
-    int& value = *intPtr;
+    int* value = new int;
 
 };
 
 FloatType& FloatType::add(float rhs)
 {
-    *fltPtr += rhs;
+    *value += rhs;
 
     return *this;
 }
 
 FloatType& FloatType::subtract(float rhs)
 {
-    *fltPtr -= rhs;
+    *value -= rhs;
     return *this;
 }
 
 FloatType& FloatType::multiply(float rhs)
 {
-    *fltPtr *= rhs;
+    *value *= rhs;
     return *this;
 }
 
@@ -209,25 +224,25 @@ FloatType& FloatType::divide(float rhs)
     if ( rhs == 0.f )
         std::cout << "warning: floating point division by zero!" << std::endl;
     
-    *fltPtr /= rhs;
+    *value /= rhs;
     return *this;
 }
 
 DoubleType& DoubleType::add(double rhs)
 {
-    *dblPtr += rhs;
+    *value += rhs;
     return *this;
 }
 
 DoubleType& DoubleType::subtract(double rhs)
 {
-    *dblPtr -= rhs;
+    *value -= rhs;
     return *this;
 }
 
 DoubleType& DoubleType::multiply(double rhs)
 {
-    *dblPtr *= rhs;
+    *value *= rhs;
     return *this;
 }
 
@@ -236,25 +251,25 @@ DoubleType& DoubleType::divide(double rhs)
     if ( rhs == 0.0 )
         std::cout << "warning: floating point division by zero!" << std::endl;
 
-    *dblPtr /= rhs;
+    *value /= rhs;
     return *this;
 }
 
 IntType& IntType::add(int rhs)
 {
-    *intPtr += rhs;
+    *value += rhs;
     return *this;
 }
 
 IntType& IntType::subtract(int rhs)
 {
-    *intPtr -= rhs;
+    *value -= rhs;
     return *this;
 }
 
 IntType& IntType::multiply(int rhs)
 {
-    *intPtr *= rhs;
+    *value *= rhs;
     return *this;
 }
 
@@ -266,7 +281,7 @@ IntType& IntType::divide(int rhs)
     }
     else 
     {
-        *intPtr /= rhs;
+        *value /= rhs;
     }
     
     return *this;
