@@ -123,8 +123,6 @@ struct HeapA
 #include <iostream>
 
 // Forward declarations
-struct DoubleType;
-struct IntType;
 
 struct FloatType
 {
@@ -144,6 +142,11 @@ struct FloatType
         *fltPtr = fValue;
     }
 
+    // Conversion Function
+    operator float() const
+    {
+        return value;
+    }
 };
 
 struct DoubleType
@@ -164,6 +167,12 @@ struct DoubleType
         *dblPtr = dValue;
     }
 
+    // Conversion function
+    operator double() const
+    {
+        return value;
+    }
+
 };
 
 struct IntType
@@ -182,6 +191,12 @@ struct IntType
     IntType(int iValue)
     {
         *intPtr = iValue;
+    }
+
+    // Conversion function
+    operator int() const
+    {
+        return value;
     }
 
 };
