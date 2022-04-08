@@ -114,9 +114,9 @@ struct FloatType
     FloatType& divide( float rhs );
 
     // Constructor (Instruction 2)
-    FloatType(float fValue)
+    FloatType(float fValue) : value{new float(fValue)}
     {
-        *value = fValue;
+        
     }
 
     // Destructor
@@ -133,7 +133,7 @@ struct FloatType
 
 private:
     // Heap-Allocated Float (Instruction 1)
-    float* value = new float;
+    float* value = nullptr;
 };
 
 struct DoubleType
@@ -145,9 +145,9 @@ struct DoubleType
     DoubleType& divide( double rhs );
 
     // Constructor (Instruction 2)
-    DoubleType(double dValue)
+    DoubleType(double dValue) : value{new double(dValue)}
     {
-        *value = dValue;
+        
     }
 
     // Destructor
@@ -164,7 +164,7 @@ struct DoubleType
 
 private:
     // Heap-Allocated Double (Instruction 1)
-    double* value = new double;
+    double* value = nullptr;
 
 };
 
@@ -177,9 +177,9 @@ struct IntType
     IntType& divide(int rhs);
 
     // Constructor (Instruction 2)
-    IntType(int iValue)
+    IntType(int iValue) : value{new int(iValue)}
     {
-        *value = iValue;
+        
     }
 
     // Destructor
@@ -196,7 +196,7 @@ struct IntType
 
 private:
     // Heap-Allocated Int (Instruction 1)
-    int* value = new int;
+    int* value = nullptr;
 
 };
 
